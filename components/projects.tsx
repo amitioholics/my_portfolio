@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowUpRight, Brain, Calendar, TrendingUp, Dumbbell, DollarSign } from "lucide-react"
+import { ArrowUpRight, Brain, Calendar, TrendingUp, Dumbbell, DollarSign, ExternalLink } from "lucide-react"
 
 const projects = [
   {
@@ -19,6 +19,7 @@ const projects = [
     icon: Calendar,
     gradient: "from-blue-500/10 to-cyan-500/10",
     borderColor: "hover:border-blue-500/50",
+    github: "https://github.com/amitioholics/Campuz",
   },
   {
     title: "NoteGenius",
@@ -35,9 +36,10 @@ const projects = [
     icon: Brain,
     gradient: "from-purple-500/10 to-pink-500/10",
     borderColor: "hover:border-purple-500/50",
+    github: "https://github.com/amitioholics/NoteGenius",
   },
   {
-    title: "FitHub (AI Fitness Trainer)",
+    title: "FitHub",
     role: "Product Manager",
     duration: "10 Days (MVP Sprint)",
     description:
@@ -52,9 +54,10 @@ const projects = [
     icon: Dumbbell,
     gradient: "from-green-500/10 to-emerald-500/10",
     borderColor: "hover:border-green-500/50",
+    github: "https://github.com/amitioholics/FitHub",
   },
   {
-    title: "Commute Pass (Ride-Hailing Feature)",
+    title: "Commute Pass",
     role: "Product Manager",
     duration: "PRD Development",
     description:
@@ -69,9 +72,10 @@ const projects = [
     icon: TrendingUp,
     gradient: "from-orange-500/10 to-amber-500/10",
     borderColor: "hover:border-orange-500/50",
+    github: "https://github.com/amitioholics/Comutee_Pass",
   },
   {
-    title: "TaxSense: Tax Loss Harvesting Assistant",
+    title: "TaxSense",
     role: "Product Manager",
     duration: "Premium Feature Proposal",
     description:
@@ -86,6 +90,7 @@ const projects = [
     icon: DollarSign,
     gradient: "from-indigo-500/10 to-blue-500/10",
     borderColor: "hover:border-indigo-500/50",
+    github: "https://github.com/amitioholics/Taxsense",
   },
 ]
 
@@ -105,60 +110,76 @@ export function Projects() {
           {projects.map((project) => {
             const Icon = project.icon
             return (
-              <Card
+              <a
                 key={project.title}
-                className={`group hover:shadow-2xl ${project.borderColor} transition-all duration-300 overflow-hidden relative backdrop-blur-sm`}
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={project.github ? "block hover:no-underline" : ""}
               >
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-                />
+                <Card
+                  className={`group ${project.github ? "cursor-pointer" : ""} hover:shadow-2xl ${project.borderColor} transition-all duration-300 overflow-hidden relative backdrop-blur-sm h-full`}
+                >
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  />
 
-                <CardHeader className="relative space-y-4">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-start gap-4 flex-1">
-                      <div className="rounded-xl bg-primary/10 p-3 mt-1 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                        <Icon className="h-6 w-6 text-primary" />
+                  <CardHeader className="relative space-y-4">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex items-start gap-4 flex-1">
+                        <div className="rounded-xl bg-primary/10 p-3 mt-1 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                          <Icon className="h-6 w-6 text-primary" />
+                        </div>
+                        <div className="space-y-2 flex-1">
+                          <CardTitle className="text-2xl group-hover:text-primary transition-colors leading-tight text-balance">
+                            {project.title}
+                          </CardTitle>
+                          <CardDescription className="text-sm leading-relaxed">{project.role}</CardDescription>
+                          <p className="text-xs text-muted-foreground font-medium">{project.duration}</p>
+                        </div>
                       </div>
-                      <div className="space-y-2 flex-1">
-                        <CardTitle className="text-2xl group-hover:text-primary transition-colors leading-tight text-balance">
-                          {project.title}
-                        </CardTitle>
-                        <CardDescription className="text-sm leading-relaxed">{project.role}</CardDescription>
-                        <p className="text-xs text-muted-foreground font-medium">{project.duration}</p>
-                      </div>
+                      <ArrowUpRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all flex-shrink-0" />
                     </div>
-                    <ArrowUpRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all flex-shrink-0" />
-                  </div>
-                </CardHeader>
+                  </CardHeader>
 
-                <CardContent className="space-y-6 relative">
-                  <p className="text-sm text-muted-foreground leading-relaxed text-pretty">{project.description}</p>
+                  <CardContent className="space-y-6 relative">
+                    <p className="text-sm text-muted-foreground leading-relaxed text-pretty">{project.description}</p>
 
-                  <div className="space-y-3">
-                    <h4 className="text-xs font-bold uppercase tracking-wide text-foreground/80">Key Impact</h4>
-                    <ul className="space-y-2.5 text-sm text-muted-foreground">
-                      {project.achievements.map((achievement, i) => (
-                        <li key={i} className="flex gap-3 leading-relaxed">
-                          <span className="text-primary mt-0.5 flex-shrink-0 font-bold">•</span>
-                          <span className="text-pretty">{achievement}</span>
-                        </li>
+                    <div className="space-y-3">
+                      <h4 className="text-xs font-bold uppercase tracking-wide text-foreground/80">Key Impact</h4>
+                      <ul className="space-y-2.5 text-sm text-muted-foreground">
+                        {project.achievements.map((achievement, i) => (
+                          <li key={i} className="flex gap-3 leading-relaxed">
+                            <span className="text-primary mt-0.5 flex-shrink-0 font-bold">•</span>
+                            <span className="text-pretty">{achievement}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {project.skills.map((skill) => (
+                        <Badge
+                          key={skill}
+                          variant="secondary"
+                          className="text-xs font-medium hover:bg-primary/20 transition-colors"
+                        >
+                          {skill}
+                        </Badge>
                       ))}
-                    </ul>
-                  </div>
+                    </div>
 
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {project.skills.map((skill) => (
-                      <Badge
-                        key={skill}
-                        variant="secondary"
-                        className="text-xs font-medium hover:bg-primary/20 transition-colors"
-                      >
-                        {skill}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+                    {project.github && (
+                      <div className="pt-4 border-t border-border/50">
+                        <span className="inline-flex items-center gap-2 text-sm font-medium text-primary group-hover:gap-3 transition-all">
+                          <ExternalLink className="h-4 w-4" />
+                          View on GitHub
+                        </span>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </a>
             )
           })}
         </div>

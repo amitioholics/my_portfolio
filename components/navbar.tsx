@@ -25,6 +25,14 @@ export function Navbar() {
     document.body.removeChild(link)
   }
 
+  const handleNavClick = (href: string) => {
+    setIsOpen(false)
+    const element = document.querySelector(href)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-lg">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,13 +44,13 @@ export function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <a
+              <button
                 key={item.name}
-                href={item.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                onClick={() => handleNavClick(item.href)}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
               >
                 {item.name}
-              </a>
+              </button>
             ))}
             <Button
               onClick={handleDownloadResume}
@@ -72,14 +80,13 @@ export function Navbar() {
         >
           <div className="flex flex-col gap-3 pt-4 border-t border-border">
             {navItems.map((item) => (
-              <a
+              <button
                 key={item.name}
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                onClick={() => handleNavClick(item.href)}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2 text-left cursor-pointer"
               >
                 {item.name}
-              </a>
+              </button>
             ))}
             <Button onClick={handleDownloadResume} size="sm" className="gap-2 w-full mt-2">
               <Download className="h-4 w-4" />

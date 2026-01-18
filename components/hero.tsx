@@ -1,6 +1,7 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import { ArrowRight, Github, Linkedin, Mail, Sparkles } from "lucide-react"
 
 export function Hero() {
@@ -18,7 +19,7 @@ export function Hero() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl max-h-4xl bg-gradient-to-r from-primary/5 via-transparent to-accent/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-4xl w-full">
+      <div className="max-w-4xl w-full relative z-10">
         <div className="space-y-8 animate-fade-in">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20 shadow-lg backdrop-blur-sm">
             <Sparkles className="h-4 w-4 animate-pulse" />
@@ -48,36 +49,37 @@ export function Hero() {
               View Projects <ArrowRight className="h-4 w-4" />
             </Button>
             <div className="flex gap-3">
-              <Button
-                variant="outline"
-                size="icon"
-                asChild
-                className="hover:border-primary/50 hover:bg-primary/5 transition-all hover:scale-110 bg-transparent"
+              <a
+                href="https://linkedin.com/in/amit-kumar-0a6617258"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "icon" }),
+                  "hover:border-primary/50 hover:bg-primary/5 transition-all hover:scale-110 bg-transparent"
+                )}
               >
-                <a href="https://linkedin.com/in/amit-kumar-0a6617258" target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="h-5 w-5" />
-                </a>
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                asChild
-                className="hover:border-primary/50 hover:bg-primary/5 transition-all hover:scale-110 bg-transparent"
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a
+                href="https://github.com/amitioholics"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "icon" }),
+                  "hover:border-primary/50 hover:bg-primary/5 transition-all hover:scale-110 bg-transparent"
+                )}
               >
-                <a href="https://github.com/amitioholics" target="_blank" rel="noopener noreferrer">
-                  <Github className="h-5 w-5" />
-                </a>
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                asChild
-                className="hover:border-primary/50 hover:bg-primary/5 transition-all hover:scale-110 bg-transparent"
+                <Github className="h-5 w-5" />
+              </a>
+              <a
+                href="mailto:amitsinghrajput263@gmail.com"
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "icon" }),
+                  "hover:border-primary/50 hover:bg-primary/5 transition-all hover:scale-110 bg-transparent"
+                )}
               >
-                <a href="mailto:amitsinghrajput263@gmail.com">
-                  <Mail className="h-5 w-5" />
-                </a>
-              </Button>
+                <Mail className="h-5 w-5" />
+              </a>
             </div>
           </div>
 
