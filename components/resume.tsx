@@ -5,14 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Download, FileText, Award, Briefcase, GraduationCap } from "lucide-react"
 
 export function Resume() {
-  const handleDownloadResume = () => {
-    const link = document.createElement("a")
-    link.href = "/resume.pdf"
-    link.download = "Amit_Kumar_Product_Manager_Resume.pdf"
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
+
 
   return (
     <section id="resume" className="px-4 py-24 border-t border-border/50">
@@ -64,12 +57,14 @@ export function Resume() {
               </div>
 
               <Button
-                onClick={handleDownloadResume}
+                asChild
                 size="lg"
                 className="gap-3 shadow-xl hover:shadow-2xl transition-all hover:scale-105 px-8 py-6 text-base"
               >
-                <Download className="h-5 w-5" />
-                Download Resume
+                <a href="/Amit_kumar_Product.pdf" download="Amit_Kumar_Product_Manager_Resume.pdf">
+                  <Download className="h-5 w-5" />
+                  Download Resume
+                </a>
               </Button>
 
               <p className="text-xs text-muted-foreground">PDF format • Updated January 2025</p>

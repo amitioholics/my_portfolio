@@ -16,14 +16,7 @@ const navItems = [
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleDownloadResume = () => {
-    const link = document.createElement("a")
-    link.href = "/resume.pdf"
-    link.download = "Amit_Kumar_Product_Manager_Resume.pdf"
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
+
 
   const handleNavClick = (href: string) => {
     setIsOpen(false)
@@ -53,12 +46,14 @@ export function Navbar() {
               </button>
             ))}
             <Button
-              onClick={handleDownloadResume}
+              asChild
               size="sm"
               className="gap-2 shadow-md hover:shadow-lg transition-shadow"
             >
-              <Download className="h-4 w-4" />
-              Resume
+              <a href="/Amit_kumar_Product.pdf" download="Amit_Kumar_Product_Manager_Resume.pdf">
+                <Download className="h-4 w-4" />
+                Resume
+              </a>
             </Button>
           </div>
 
@@ -88,9 +83,11 @@ export function Navbar() {
                 {item.name}
               </button>
             ))}
-            <Button onClick={handleDownloadResume} size="sm" className="gap-2 w-full mt-2">
-              <Download className="h-4 w-4" />
-              Download Resume
+            <Button asChild size="sm" className="gap-2 w-full mt-2">
+              <a href="/Amit_kumar_Product.pdf" download="Amit_Kumar_Product_Manager_Resume.pdf">
+                <Download className="h-4 w-4" />
+                Download Resume
+              </a>
             </Button>
           </div>
         </div>

@@ -42,9 +42,9 @@ const education = [
 ]
 
 const certifications = [
+  "LinkedIn Learning — Becoming a Product Manager: A Complete Guide (2026)",
   "OCI Generative AI Certificate (2025)",
   "NPTEL — Database Management Systems (2024)",
-  "Cisco — Programming Essentials in C++ (2024)",
 ]
 
 export function Experience() {
