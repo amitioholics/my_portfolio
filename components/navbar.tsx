@@ -27,7 +27,7 @@ export function Navbar() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-lg">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/95 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <a href="#" className="text-xl font-bold tracking-tight hover:text-primary transition-colors">
@@ -50,7 +50,7 @@ export function Navbar() {
               size="sm"
               className="gap-2 shadow-md hover:shadow-lg transition-shadow"
             >
-              <a href="/Amit_kumar_Product.pdf" download="Amit_Kumar_Product_Manager_Resume.pdf">
+              <a href="/resume.pdf" download="Amit_Kumar_Product_Manager_Resume.pdf">
                 <Download className="h-4 w-4" />
                 Resume
               </a>
@@ -84,7 +84,7 @@ export function Navbar() {
               </button>
             ))}
             <Button asChild size="sm" className="gap-2 w-full mt-2">
-              <a href="/Amit_kumar_Product.pdf" download="Amit_Kumar_Product_Manager_Resume.pdf">
+              <a href="/resume.pdf" download="Amit_Kumar_Product_Manager_Resume.pdf">
                 <Download className="h-4 w-4" />
                 Download Resume
               </a>

@@ -49,7 +49,7 @@ const certifications = [
 
 export function Experience() {
   return (
-    <section className="px-4 py-24 border-t border-border bg-muted/30">
+    <section id="experience" className="px-4 py-24 border-t border-border bg-muted/30">
       <div className="max-w-5xl mx-auto space-y-16">
         {/* Leadership Experience */}
         <div>

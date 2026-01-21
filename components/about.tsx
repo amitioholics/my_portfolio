@@ -2,7 +2,7 @@ import { Target, Users, Lightbulb } from "lucide-react"
 
 export function About() {
   return (
-    <section className="px-4 py-24 border-t border-border bg-muted/30">
+    <section id="about" className="px-4 py-24 border-t border-border bg-muted/30">
       <div className="max-w-5xl mx-auto">
         <div className="mb-12">
           <h2 className="text-sm uppercase tracking-wider text-muted-foreground mb-2">About</h2>
