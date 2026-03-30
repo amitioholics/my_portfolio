@@ -1,5 +1,6 @@
 "use client"
 
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Download, Menu, X } from "lucide-react"
 import { useState } from "react"
@@ -16,8 +17,6 @@ const navItems = [
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
 
-
-
   const handleNavClick = (href: string) => {
     setIsOpen(false)
     const element = document.querySelector(href)
@@ -27,11 +26,11 @@ export function Navbar() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/95 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <a href="#" className="text-xl font-bold tracking-tight hover:text-primary transition-colors">
-            Amit Kumar
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all font-epilogue">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="glass rounded-full px-6 py-2 flex justify-between items-center h-14 neon-glow">
+          <a href="#" className="text-xl font-black tracking-tighter hover:text-primary transition-all text-glow">
+            AMIT<span className="text-primary">.</span>K
           </a>
 
           {/* Desktop Navigation */}
@@ -40,7 +39,7 @@ export function Navbar() {
               <button
                 key={item.name}
                 onClick={() => handleNavClick(item.href)}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/70 hover:text-primary transition-colors cursor-pointer"
               >
                 {item.name}
               </button>
@@ -48,10 +47,9 @@ export function Navbar() {
             <Button
               asChild
               size="sm"
-              className="gap-2 shadow-md hover:shadow-lg transition-shadow"
+              className="rounded-full bg-primary text-primary-foreground font-bold text-[10px] uppercase tracking-widest px-6 hover:neon-glow-strong transition-all"
             >
               <a href="/resume.pdf" download="Amit_Kumar_Product_Manager_Resume.pdf">
-                <Download className="h-4 w-4" />
                 Resume
               </a>
             </Button>
@@ -60,37 +58,35 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
+            className="md:hidden p-2 text-primary hover:text-primary/80 transition-colors"
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
-        <div
-          className={cn(
-            "md:hidden overflow-hidden transition-all duration-300 ease-in-out",
-            isOpen ? "max-h-96 pb-4" : "max-h-0",
-          )}
+        <motion.div
+          initial={false}
+          animate={isOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
+          className="md:hidden glass rounded-3xl mt-2 overflow-hidden px-6"
         >
-          <div className="flex flex-col gap-3 pt-4 border-t border-border">
+          <div className="flex flex-col gap-4 py-6">
             {navItems.map((item) => (
               <button
                 key={item.name}
                 onClick={() => handleNavClick(item.href)}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2 text-left cursor-pointer"
+                className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground hover:text-primary transition-colors text-left"
               >
                 {item.name}
               </button>
             ))}
-            <Button asChild size="sm" className="gap-2 w-full mt-2">
+            <Button asChild size="sm" className="rounded-full w-full mt-2 font-bold uppercase text-[10px] tracking-widest">
               <a href="/resume.pdf" download="Amit_Kumar_Product_Manager_Resume.pdf">
-                <Download className="h-4 w-4" />
                 Download Resume
               </a>
             </Button>
           </div>
-        </div>
+        </motion.div>
       </nav>
     </header>
   )

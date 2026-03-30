@@ -1,11 +1,13 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Geist_Mono } from "next/font/google"
+import { Inter, Geist_Mono, Epilogue } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { Chatbot } from "@/components/chatbot"
 import "./globals.css"
 
-const _inter = Inter({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+const epilogue = Epilogue({ subsets: ["latin"], variable: "--font-epilogue" })
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" })
 
 export const metadata: Metadata = {
   title: "Amit Kumar - Product Manager",
@@ -37,9 +39,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`font-sans antialiased`}>
+      <body className={`${inter.variable} ${epilogue.variable} ${geistMono.variable} font-sans antialiased bg-[#150629] text-[#efdfff]`}>
         {children}
         <Analytics />
+        <Chatbot />
       </body>
     </html>
   )

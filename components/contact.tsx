@@ -1,130 +1,100 @@
+"use client"
+
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Github, Linkedin, Mail, MapPin, Phone, Send, MessageSquare } from "lucide-react"
 
 export function Contact() {
   return (
-    <section id="contact" className="px-4 py-24 border-t border-border/50 bg-muted/20">
-      <div className="max-w-5xl mx-auto">
-        <div className="mb-16 text-center">
-          <h2 className="text-sm uppercase tracking-wider text-primary font-semibold mb-3">Contact</h2>
-          <p className="text-4xl md:text-5xl font-bold text-balance mb-4">Let's Build Together</p>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-            Open to product management opportunities and collaborations
-          </p>
+    <section id="contact" className="px-4 py-32 relative font-epilogue overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] -z-10" />
+
+      <div className="max-w-5xl mx-auto relative z-10">
+        <div className="mb-20">
+          <h2 className="text-sm uppercase tracking-[0.4em] text-primary/60 mb-2 font-bold">Connect</h2>
+          <p className="text-4xl md:text-6xl font-bold">Let's Build <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Together</span></p>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-2">
-          <div className="space-y-6">
-            <div className="space-y-4">
-              <div className="flex items-start gap-3">
-                <div className="rounded-lg bg-primary/10 p-2 mt-1">
-                  <MessageSquare className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">Interested in working together?</h3>
-                  <p className="text-muted-foreground leading-relaxed text-pretty">
-                    I'm always interested in hearing about new product opportunities, especially those focused on AI,
-                    education, fintech, and productivity tools.
-                  </p>
-                </div>
-              </div>
-              <p className="text-muted-foreground leading-relaxed text-pretty pl-14">
-                Whether you're looking for a product manager who can bridge technical execution with user needs, or want
-                to discuss product strategy, I'd love to connect.
+        <div className="grid gap-12 lg:grid-cols-2">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            <div className="space-y-6">
+              <h3 className="text-2xl font-bold tracking-tight">Interested in collaborating?</h3>
+              <p className="text-lg text-muted-foreground/80 font-medium leading-relaxed">
+                I'm always looking for new product opportunities, especially in AI, Fintech, and SaaS.
+              </p>
+              <p className="text-muted-foreground/60 font-medium leading-relaxed">
+                Whether you need a product manager who bridges tech and users, or just want to talk strategy, let's connect.
               </p>
             </div>
 
             <Button
               size="lg"
-              className="gap-2 w-full sm:w-auto shadow-lg hover:shadow-xl transition-all hover:scale-105"
+              className="h-16 px-10 rounded-full bg-primary text-primary-foreground font-bold uppercase tracking-widest text-xs hover:neon-glow-strong transition-all hover:scale-105"
               asChild
             >
               <a href="mailto:amitsinghrajput263@gmail.com">
-                <Mail className="h-5 w-5" />
-                Send me an Email
+                <Mail className="h-5 w-5 mr-3" />
+                Get in Touch
               </a>
             </Button>
-          </div>
+          </motion.div>
 
-          <Card className="shadow-2xl border-primary/20 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
-            <CardContent className="pt-8 pb-8 relative">
-              <div className="space-y-3">
-                <a
-                  href="mailto:amitsinghrajput263@gmail.com"
-                  className="flex items-center gap-4 p-4 rounded-xl hover:bg-primary/5 transition-all group border border-transparent hover:border-primary/20"
-                >
-                  <div className="rounded-xl bg-primary/10 p-3 group-hover:bg-primary/20 transition-all group-hover:scale-110">
-                    <Mail className="h-6 w-6 text-primary" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Email</p>
-                    <p className="text-sm font-medium truncate group-hover:text-primary transition-colors">
-                      amitsinghrajput263@gmail.com
-                    </p>
-                  </div>
-                  <Send className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                </a>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <Card className="glass border-primary/20 overflow-hidden rounded-[2.5rem] p-2">
+              <CardContent className="p-6 space-y-4">
+                {[
+                  { icon: Mail, label: "Email", value: "amitsinghrajput263@gmail.com", href: "mailto:amitsinghrajput263@gmail.com", color: "text-primary" },
+                  { icon: Phone, label: "Phone", value: "+91 9525739361", href: "tel:+919525739361", color: "text-secondary" },
+                  { icon: MapPin, label: "Location", value: "Patna, Bihar, India", color: "text-accent" },
+                ].map((item, i) => (
+                  <a
+                    key={i}
+                    href={item.href}
+                    className="flex items-center gap-5 p-5 rounded-3xl hover:bg-white/5 transition-all group border border-transparent hover:border-white/10"
+                  >
+                    <div className={`rounded-2xl bg-white/5 p-4 group-hover:neon-glow transition-all`}>
+                      <item.icon className={`h-6 w-6 ${item.color}`} />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground/40 mb-1">{item.label}</p>
+                      <p className="font-bold tracking-tight text-muted-foreground/80 group-hover:text-white transition-colors">{item.value}</p>
+                    </div>
+                    {item.href && <Send className="h-4 w-4 text-muted-foreground/20 group-hover:text-primary transition-all group-hover:translate-x-1" />}
+                  </a>
+                ))}
 
-                <a
-                  href="tel:+919525739361"
-                  className="flex items-center gap-4 p-4 rounded-xl hover:bg-accent/5 transition-all group border border-transparent hover:border-accent/20"
-                >
-                  <div className="rounded-xl bg-accent/10 p-3 group-hover:bg-accent/20 transition-all group-hover:scale-110">
-                    <Phone className="h-6 w-6 text-accent" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Phone</p>
-                    <p className="text-sm font-medium group-hover:text-accent transition-colors">+91 9525739361</p>
-                  </div>
-                </a>
-
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-muted/30">
-                  <div className="rounded-xl bg-chart-3/20 p-3">
-                    <MapPin className="h-6 w-6 text-chart-3" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Location</p>
-                    <p className="text-sm font-medium">Patna, Bihar, India</p>
-                  </div>
+                <div className="pt-6 flex gap-4 justify-center">
+                  {[
+                    { icon: Linkedin, href: "https://linkedin.com/in/amit-kumar-0a6617258" },
+                    { icon: Github, href: "https://github.com/amitioholics" },
+                  ].map((social, i) => (
+                    <Button
+                      key={i}
+                      variant="outline"
+                      size="icon"
+                      asChild
+                      className="w-12 h-12 rounded-full border-white/10 hover:border-primary/50 hover:bg-primary/5 transition-all hover:scale-110 bg-transparent text-muted-foreground hover:text-primary"
+                    >
+                      <a href={social.href} target="_blank" rel="noopener noreferrer">
+                        <social.icon className="h-5 w-5" />
+                      </a>
+                    </Button>
+                  ))}
                 </div>
-
-                <div className="pt-6 border-t border-border flex gap-3 justify-center">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    asChild
-                    className="hover:border-primary/50 hover:bg-primary/5 transition-all hover:scale-110 bg-transparent"
-                  >
-                    <a href="https://linkedin.com/in/amit-kumar-0a6617258" target="_blank" rel="noopener noreferrer">
-                      <Linkedin className="h-5 w-5" />
-                    </a>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    asChild
-                    className="hover:border-primary/50 hover:bg-primary/5 transition-all hover:scale-110 bg-transparent"
-                  >
-                    <a href="https://github.com/amitioholics" target="_blank" rel="noopener noreferrer">
-                      <Github className="h-5 w-5" />
-                    </a>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    asChild
-                    className="hover:border-primary/50 hover:bg-primary/5 transition-all hover:scale-110 bg-transparent"
-                  >
-                    <a href="mailto:amitsinghrajput263@gmail.com">
-                      <Mail className="h-5 w-5" />
-                    </a>
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </motion.div>
         </div>
       </div>
     </section>

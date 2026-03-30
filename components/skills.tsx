@@ -1,8 +1,20 @@
+"use client"
+
+import { motion } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Briefcase, Code, Wrench } from "lucide-react"
 
-const skillCategories = [
+import { LucideIcon } from "lucide-react"
+
+interface SkillCategory {
+  category: string
+  icon: LucideIcon
+  color: string
+  skills: string[]
+}
+
+const skillCategories: SkillCategory[] = [
   {
     category: "Product Management",
     icon: Briefcase,
@@ -62,36 +74,50 @@ const skillCategories = [
 
 export function Skills() {
   return (
-    <section id="skills" className="px-4 py-24 border-t border-border">
-      <div className="max-w-5xl mx-auto">
-        <div className="mb-12">
-          <h2 className="text-sm uppercase tracking-wider text-muted-foreground mb-2">Skills</h2>
-          <p className="text-3xl font-semibold text-balance">Technical & Product Expertise</p>
+    <section id="skills" className="px-4 py-32 relative">
+      <div className="max-w-5xl mx-auto relative z-10">
+        <div className="mb-16">
+          <h2 className="text-sm uppercase tracking-[0.4em] text-primary/60 mb-2 font-bold">Expertise</h2>
+          <p className="text-4xl md:text-6xl font-bold font-epilogue">Technical & <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Product</span> Skills</p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {skillCategories.map((category) => {
+        <div className="grid gap-8 md:grid-cols-3">
+          {skillCategories.map((category, idx) => {
             const Icon = category.icon
             return (
-              <Card key={category.category} className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="flex items-center gap-3">
-                    <div className={`rounded-lg bg-${category.color}/10 p-2`}>
-                      <Icon className={`h-5 w-5 ${category.color}`} />
+              <motion.div
+                key={category.category}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -10, scale: 1.02 }}
+                className="h-full"
+              >
+                <Card className="glass h-full hover:border-primary/50 hover:neon-glow transition-all duration-300 font-epilogue">
+                  <CardHeader>
+                    <div className="flex items-center gap-4">
+                      <div className={`rounded-xl bg-primary/10 p-3 neon-glow`}>
+                        <Icon className={`h-6 w-6 text-primary`} />
+                      </div>
+                      <CardTitle className="text-xl font-bold tracking-tight">{category.category}</CardTitle>
                     </div>
-                    <CardTitle className="text-lg">{category.category}</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {category.skills.map((skill) => (
-                      <Badge key={skill} variant="outline" className="hover:bg-muted transition-colors">
-                        {skill}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2">
+                      {category.skills.map((skill) => (
+                        <Badge
+                          key={skill}
+                          variant="outline"
+                          className="bg-primary/5 border-primary/10 text-primary/80 hover:bg-primary/20 hover:text-primary transition-all cursor-default"
+                        >
+                          {skill}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             )
           })}
         </div>

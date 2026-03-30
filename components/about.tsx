@@ -1,60 +1,78 @@
+"use client"
+
+import { motion } from "framer-motion"
 import { Target, Users, Lightbulb } from "lucide-react"
 
 export function About() {
+  const cards = [
+    {
+      title: "Product-First Mindset",
+      icon: Target,
+      color: "text-primary",
+      desc: "User needs analysis combined with data-driven insights to define clear PRDs and prioritize features using frameworks like RICE."
+    },
+    {
+      title: "Cross-Functional Leadership",
+      icon: Users,
+      color: "text-secondary",
+      desc: "Led technical workshops for 150+ students as VP of IEEE Club and collaborated with engineering teams to execute product roadmaps."
+    },
+    {
+      title: "AI & Innovation Focus",
+      icon: Lightbulb,
+      color: "text-accent",
+      desc: "Built AI-powered products including NoteGenius (GPT-4), FitHub (adaptive fitness), and tax optimization tools for fintech."
+    }
+  ];
+
   return (
-    <section id="about" className="px-4 py-24 border-t border-border bg-muted/30">
-      <div className="max-w-5xl mx-auto">
-        <div className="mb-12">
-          <h2 className="text-sm uppercase tracking-wider text-muted-foreground mb-2">About</h2>
-          <p className="text-3xl font-semibold text-balance">Building Products That Matter</p>
+    <section id="about" className="px-4 py-32 relative font-epilogue">
+      <div className="max-w-5xl mx-auto relative z-10">
+        <div className="mb-16">
+          <h2 className="text-sm uppercase tracking-[0.4em] text-primary/60 mb-2 font-bold">Philosophy</h2>
+          <p className="text-4xl md:text-6xl font-bold">Building Products That <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Matter</span></p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3 mb-12">
-          <div className="p-6 rounded-lg bg-card border border-border">
-            <div className="rounded-lg bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
-              <Target className="h-6 w-6 text-primary" />
-            </div>
-            <h3 className="font-semibold mb-2">Product-First Mindset</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              User needs analysis combined with data-driven insights to define clear PRDs and prioritize features using
-              frameworks like RICE.
-            </p>
-          </div>
-
-          <div className="p-6 rounded-lg bg-card border border-border">
-            <div className="rounded-lg bg-accent/10 w-12 h-12 flex items-center justify-center mb-4">
-              <Users className="h-6 w-6 text-accent" />
-            </div>
-            <h3 className="font-semibold mb-2">Cross-Functional Leadership</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Led technical workshops for 150+ students as VP of IEEE Club and collaborated with engineering teams to
-              execute product roadmaps.
-            </p>
-          </div>
-
-          <div className="p-6 rounded-lg bg-card border border-border">
-            <div className="rounded-lg bg-chart-3/20 w-12 h-12 flex items-center justify-center mb-4">
-              <Lightbulb className="h-6 w-6 text-chart-3" />
-            </div>
-            <h3 className="font-semibold mb-2">AI & Innovation Focus</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Built AI-powered products including NoteGenius (GPT-4), FitHub (adaptive fitness), and tax optimization
-              tools for fintech.
-            </p>
-          </div>
+        <div className="grid gap-8 md:grid-cols-3 mb-20">
+          {cards.map((card, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.1 }}
+              viewport={{ once: true }}
+              className="glass p-8 rounded-[2rem] border-primary/10 hover:border-primary/40 transition-all group"
+            >
+              <div className={`rounded-2xl bg-primary/10 w-14 h-14 flex items-center justify-center mb-6 group-hover:neon-glow transition-all`}>
+                <card.icon className={`h-7 w-7 ${card.color}`} />
+              </div>
+              <h3 className="font-bold text-xl mb-4 tracking-tight">{card.title}</h3>
+              <p className="text-sm text-muted-foreground/80 leading-relaxed font-medium">
+                {card.desc}
+              </p>
+            </motion.div>
+          ))}
         </div>
 
-        <div className="space-y-6 text-lg leading-relaxed">
-          <p className="text-pretty">
-            I'm a product-oriented Computer Science undergraduate passionate about creating intuitive, scalable products
-            focused on learning, productivity, and exceptional user experience.
-          </p>
+        <div className="space-y-8 text-xl md:text-2xl font-bold leading-tight max-w-4xl">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-balance"
+          >
+            I'm a product-oriented Computer Science undergraduate passionate about creating intuitive, <span className="text-primary">scalable products</span> focused on learning, productivity, and exceptional user experience.
+          </motion.p>
 
-          <p className="text-pretty text-muted-foreground">
-            Currently pursuing B.Tech in Computer Science at Chandigarh Group of Colleges, I've built full-stack
-            products that solve real scheduling, learning, and financial challenges. My work spans AI integration,
-            fintech innovation, and enterprise SaaS solutions.
-          </p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-balance text-muted-foreground/60"
+          >
+            Currently pursuing B.Tech in Computer Science at Chandigarh Group of Colleges, I've built full-stack products that solve real scheduling, learning, and financial challenges.
+          </motion.p>
         </div>
       </div>
     </section>

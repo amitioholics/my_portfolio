@@ -1,8 +1,26 @@
+"use client"
+
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ArrowUpRight, Brain, Calendar, TrendingUp, Dumbbell, DollarSign, ExternalLink } from "lucide-react"
 
-const projects = [
+import { LucideIcon } from "lucide-react"
+
+interface Project {
+  title: string
+  role: string
+  duration: string
+  description: string
+  achievements: string[]
+  skills: string[]
+  icon: LucideIcon
+  gradient: string
+  borderColor: string
+  github: string
+}
+
+const projects: Project[] = [
   {
     title: "CAMPUZ",
     role: "Product Manager & Full-Stack Developer",
@@ -94,94 +112,139 @@ const projects = [
   },
 ]
 
+function ProjectCard({ project }: { project: typeof projects[0] }) {
+  const Icon = project.icon
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+
+  const mouseXSpring = useSpring(x)
+  const mouseYSpring = useSpring(y)
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["17.5deg", "-17.5deg"])
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-17.5deg", "17.5deg"])
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const width = rect.width
+    const height = rect.height
+    const mouseX = e.clientX - rect.left
+    const mouseY = e.clientY - rect.top
+    const xPct = mouseX / width - 0.5
+    const yPct = mouseY / height - 0.5
+    x.set(xPct)
+    y.set(yPct)
+  }
+
+  const handleMouseLeave = () => {
+    x.set(0)
+    y.set(0)
+  }
+
+  return (
+    <motion.div
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative h-full"
+    >
+      <a
+        href={project.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block h-full group outline-none"
+      >
+        <Card
+          className="glass group-hover:border-primary/80 group-hover:neon-glow-strong transition-all duration-500 overflow-hidden relative h-full font-epilogue"
+          style={{ transform: "translateZ(50px)" }}
+        >
+          <div
+            className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20 group-hover:opacity-40 transition-opacity duration-500`}
+          />
+
+          <CardHeader className="relative space-y-4">
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex items-start gap-4 flex-1">
+                <div className="rounded-xl bg-primary/10 p-3 mt-1 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 neon-glow">
+                  <Icon className="h-6 w-6 text-primary" />
+                </div>
+                <div className="space-y-2 flex-1">
+                  <CardTitle className="text-2xl group-hover:text-primary group-hover:text-glow transition-all leading-tight text-balance font-bold">
+                    {project.title}
+                  </CardTitle>
+                  <CardDescription className="text-sm leading-relaxed text-muted-foreground/80">{project.role}</CardDescription>
+                  <p className="text-xs text-primary/60 font-medium tracking-widest uppercase">{project.duration}</p>
+                </div>
+              </div>
+              <ArrowUpRight className="h-5 w-5 text-primary/40 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all flex-shrink-0" />
+            </div>
+          </CardHeader>
+
+          <CardContent className="space-y-6 relative">
+            <p className="text-sm text-muted-foreground/90 leading-relaxed text-pretty">{project.description}</p>
+
+            <div className="space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary/70">Key Impact</h4>
+              <ul className="space-y-2.5 text-sm text-muted-foreground/80">
+                {project.achievements.map((achievement, i) => (
+                  <li key={i} className="flex gap-3 leading-relaxed">
+                    <span className="text-primary mt-0.5 flex-shrink-0 font-bold">›</span>
+                    <span className="text-pretty">{achievement}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="flex flex-wrap gap-2 pt-2">
+              {project.skills.map((skill) => (
+                <Badge
+                  key={skill}
+                  variant="secondary"
+                  className="bg-primary/5 text-primary border-primary/20 text-xs font-medium hover:bg-primary/20 transition-colors"
+                >
+                  {skill}
+                </Badge>
+              ))}
+            </div>
+
+            {project.github && (
+              <div className="pt-4 border-t border-primary/10">
+                <span className="inline-flex items-center gap-2 text-sm font-bold text-primary group-hover:gap-3 transition-all tracking-wider uppercase">
+                  <ExternalLink className="h-4 w-4" />
+                  View Discovery
+                </span>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </a>
+    </motion.div>
+  )
+}
+
 export function Projects() {
   return (
-    <section id="projects" className="px-4 py-24 border-t border-border/50 bg-muted/20">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-16 text-center">
-          <h2 className="text-sm uppercase tracking-wider text-primary font-semibold mb-3">Product Portfolio</h2>
-          <p className="text-4xl md:text-5xl font-bold text-balance mb-4">Projects & Case Studies</p>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-            Real-world product management experience across AI, fintech, and enterprise solutions
+    <section id="projects" className="px-4 py-32 relative overflow-hidden">
+      {/* Background blobs for astral effect */}
+      <div className="absolute top-1/4 -left-20 w-64 h-64 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-secondary/10 rounded-full blur-[150px] pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="mb-20 text-center space-y-4">
+          <h2 className="text-sm uppercase tracking-[0.4em] text-primary font-bold">Product Portfolio</h2>
+          <p className="text-5xl md:text-7xl font-bold tracking-tight font-epilogue">Projects & <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Insights</span></p>
+          <p className="text-xl text-muted-foreground/70 max-w-2xl mx-auto text-pretty font-medium">
+            Immersive product management experiences across AI, fintech, and enterprise landscapes.
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2">
-          {projects.map((project) => {
-            const Icon = project.icon
-            return (
-              <a
-                key={project.title}
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={project.github ? "block hover:no-underline" : ""}
-              >
-                <Card
-                  className={`group ${project.github ? "cursor-pointer" : ""} hover:shadow-2xl ${project.borderColor} transition-all duration-300 overflow-hidden relative backdrop-blur-sm h-full`}
-                >
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-                  />
-
-                  <CardHeader className="relative space-y-4">
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex items-start gap-4 flex-1">
-                        <div className="rounded-xl bg-primary/10 p-3 mt-1 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                          <Icon className="h-6 w-6 text-primary" />
-                        </div>
-                        <div className="space-y-2 flex-1">
-                          <CardTitle className="text-2xl group-hover:text-primary transition-colors leading-tight text-balance">
-                            {project.title}
-                          </CardTitle>
-                          <CardDescription className="text-sm leading-relaxed">{project.role}</CardDescription>
-                          <p className="text-xs text-muted-foreground font-medium">{project.duration}</p>
-                        </div>
-                      </div>
-                      <ArrowUpRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all flex-shrink-0" />
-                    </div>
-                  </CardHeader>
-
-                  <CardContent className="space-y-6 relative">
-                    <p className="text-sm text-muted-foreground leading-relaxed text-pretty">{project.description}</p>
-
-                    <div className="space-y-3">
-                      <h4 className="text-xs font-bold uppercase tracking-wide text-foreground/80">Key Impact</h4>
-                      <ul className="space-y-2.5 text-sm text-muted-foreground">
-                        {project.achievements.map((achievement, i) => (
-                          <li key={i} className="flex gap-3 leading-relaxed">
-                            <span className="text-primary mt-0.5 flex-shrink-0 font-bold">•</span>
-                            <span className="text-pretty">{achievement}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 pt-2">
-                      {project.skills.map((skill) => (
-                        <Badge
-                          key={skill}
-                          variant="secondary"
-                          className="text-xs font-medium hover:bg-primary/20 transition-colors"
-                        >
-                          {skill}
-                        </Badge>
-                      ))}
-                    </div>
-
-                    {project.github && (
-                      <div className="pt-4 border-t border-border/50">
-                        <span className="inline-flex items-center gap-2 text-sm font-medium text-primary group-hover:gap-3 transition-all">
-                          <ExternalLink className="h-4 w-4" />
-                          View on GitHub
-                        </span>
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-              </a>
-            )
-          })}
+        <div className="grid gap-12 md:grid-cols-2">
+          {projects.map((project) => (
+            <ProjectCard key={project.title} project={project} />
+          ))}
         </div>
       </div>
     </section>

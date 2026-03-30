@@ -1,145 +1,181 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Award, GraduationCap, Users } from "lucide-react"
+"use client"
 
-const experiences = [
+import { motion } from "framer-motion"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Award, Briefcase, GraduationCap, Users } from "lucide-react"
+import Image from "next/image"
+
+const workExperiences = [
+  {
+    title: "Product Management Intern",
+    organization: "PaisaWapas (Nxtify Technologies)",
+    location: "Bangalore",
+    date: "Feb 2026 – Present",
+    logoUrl: "/images/paisawapas.png",
+    description: "Driving product initiatives and feature development for a leading cashback and affiliate platform.",
+    achievements: [
+      "Assisted in defining product roadmaps and feature prioritization based on comprehensive user and market data analysis.",
+      "Collaborated with cross-functional teams including engineering and design to execute successful product deployments.",
+      "Conducted market research and competitor analysis to identify new growth opportunities."
+    ],
+  },
+]
+
+const leadershipExperiences = [
   {
     title: "Vice President",
     organization: "IEEE Club",
-    location: "Chandigarh Group of Colleges",
-    description: "Led ideation, planning, and execution of technical workshops",
+    location: "CGC Landran",
+    date: "2023 - 2025",
+    description: "Led ideation, planning, and execution of technical workshops for 150+ students.",
     achievements: [
-      "Organized workshops attended by 150+ students, improving engagement through user feedback",
-      "Collaborated with cross-functional teams (faculty, design, logistics) for smooth execution",
+      "Organized workshops improving engagement through user feedback",
+      "Collaborated with faculty and design teams for smooth execution",
       "Implemented post-event feedback loops and data-driven improvements",
-      "Increased participation and session satisfaction through iterative improvements",
     ],
   },
 ]
 
 const education = [
   {
-    degree: "Bachelor of Technology",
-    field: "Computer Science Engineering",
-    institution: "Chandigarh Group of Colleges, Landran",
+    degree: "B.Tech Computer Science",
+    institution: "CGC Landran",
     location: "Mohali, Punjab",
     period: "2022 – 2026",
     score: "7.04 CGPA",
   },
-  {
-    degree: "Intermediate (CBSE)",
-    institution: "Eklavya Educational Complex",
-    location: "Patna",
-    period: "2020 – 2021",
-    score: "76.4%",
-  },
-  {
-    degree: "High School (CBSE)",
-    institution: "Keshav Saraswati Vidya Mandir",
-    location: "Patna",
-    period: "2018 – 2019",
-    score: "72.4%",
-  },
-]
-
-const certifications = [
-  "LinkedIn Learning — Becoming a Product Manager: A Complete Guide (2026)",
-  "OCI Generative AI Certificate (2025)",
-  "NPTEL — Database Management Systems (2024)",
 ]
 
 export function Experience() {
   return (
-    <section id="experience" className="px-4 py-24 border-t border-border bg-muted/30">
-      <div className="max-w-5xl mx-auto space-y-16">
-        {/* Leadership Experience */}
-        <div>
-          <div className="flex items-center gap-3 mb-8">
-            <div className="rounded-lg bg-primary/10 p-2">
-              <Users className="h-5 w-5 text-primary" />
+    <section id="experience" className="px-4 py-32 relative font-epilogue">
+      <div className="max-w-5xl mx-auto space-y-24 relative z-10">
+
+        {/* Work & Leadership */}
+        <div className="grid gap-16 md:grid-cols-2">
+          {/* Work */}
+          <div className="space-y-8">
+            <div className="flex items-center gap-4">
+              <div className="rounded-xl bg-primary/10 p-3 neon-glow">
+                <Briefcase className="h-6 w-6 text-primary" />
+              </div>
+              <h2 className="text-2xl font-bold tracking-tight uppercase text-xs tracking-[0.3em] text-primary/60">Experience</h2>
             </div>
-            <h2 className="text-sm uppercase tracking-wider text-muted-foreground">Leadership Experience</h2>
-          </div>
-
-          <div className="space-y-6">
-            {experiences.map((exp) => (
-              <Card key={exp.title} className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-xl">{exp.title}</CardTitle>
-                  <CardDescription className="text-base">
-                    {exp.organization} • {exp.location}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <p className="text-muted-foreground leading-relaxed">{exp.description}</p>
-
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    {exp.achievements.map((achievement, i) => (
-                      <li key={i} className="flex gap-2 leading-relaxed">
-                        <span className="text-primary mt-0.5">•</span>
-                        <span>{achievement}</span>
+            {workExperiences.map((exp, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <Card className="glass border-primary/10 hover:border-primary/40 transition-all p-6 rounded-[2rem]">
+                  <div className="mb-4">
+                    <p className="text-primary font-bold text-xs uppercase tracking-widest mb-1">{exp.date}</p>
+                    <h3 className="text-xl font-bold tracking-tight">{exp.title}</h3>
+                    <p className="text-muted-foreground/60 font-medium text-sm">{exp.organization}</p>
+                  </div>
+                  <ul className="space-y-3 text-sm text-muted-foreground/80 font-medium">
+                    {exp.achievements.map((item, i) => (
+                      <li key={i} className="flex gap-3">
+                        <span className="text-primary">•</span>
+                        <span>{item}</span>
                       </li>
                     ))}
                   </ul>
-                </CardContent>
-              </Card>
+                </Card>
+              </motion.div>
             ))}
           </div>
-        </div>
 
-        {/* Education */}
-        <div>
-          <div className="flex items-center gap-3 mb-8">
-            <div className="rounded-lg bg-accent/10 p-2">
-              <GraduationCap className="h-5 w-5 text-accent" />
+          {/* Leadership */}
+          <div className="space-y-8">
+            <div className="flex items-center gap-4">
+              <div className="rounded-xl bg-secondary/10 p-3 neon-glow">
+                <Users className="h-6 w-6 text-secondary" />
+              </div>
+              <h2 className="text-2xl font-bold tracking-tight uppercase text-xs tracking-[0.3em] text-secondary/60">Leadership</h2>
             </div>
-            <h2 className="text-sm uppercase tracking-wider text-muted-foreground">Education</h2>
-          </div>
-
-          <div className="space-y-6">
-            {education.map((edu) => (
-              <Card key={edu.degree + edu.institution} className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-xl">{edu.degree}</CardTitle>
-                  {edu.field && <CardDescription className="text-base">{edu.field}</CardDescription>}
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  <div className="flex justify-between items-start flex-wrap gap-2">
-                    <div>
-                      <p className="font-medium">{edu.institution}</p>
-                      <p className="text-sm text-muted-foreground">{edu.location}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm text-muted-foreground">{edu.period}</p>
-                      <p className="text-sm font-medium text-primary">{edu.score}</p>
-                    </div>
+            {leadershipExperiences.map((exp, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <Card className="glass border-secondary/10 hover:border-secondary/40 transition-all p-6 rounded-[2rem]">
+                  <div className="mb-4">
+                    <p className="text-secondary font-bold text-xs uppercase tracking-widest mb-1">{exp.date}</p>
+                    <h3 className="text-xl font-bold tracking-tight">{exp.title}</h3>
+                    <p className="text-muted-foreground/60 font-medium text-sm">{exp.organization}</p>
                   </div>
-                </CardContent>
-              </Card>
+                  <ul className="space-y-3 text-sm text-muted-foreground/80 font-medium">
+                    {exp.achievements.map((item, i) => (
+                      <li key={i} className="flex gap-3">
+                        <span className="text-secondary">•</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
 
-        {/* Certifications */}
-        <div>
-          <div className="flex items-center gap-3 mb-8">
-            <div className="rounded-lg bg-chart-3/20 p-2">
-              <Award className="h-5 w-5 text-chart-3" />
+        {/* Education & Certs */}
+        <div className="grid gap-16 md:grid-cols-2 pt-16 border-t border-primary/5">
+          <div className="space-y-8">
+            <div className="flex items-center gap-4">
+              <div className="rounded-xl bg-accent/10 p-3 neon-glow">
+                <GraduationCap className="h-6 w-6 text-accent" />
+              </div>
+              <h2 className="text-2xl font-bold tracking-tight uppercase text-xs tracking-[0.3em] text-accent/60">Education</h2>
             </div>
-            <h2 className="text-sm uppercase tracking-wider text-muted-foreground">Certifications</h2>
+            {education.map((edu, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="glass p-8 rounded-[2rem] border-accent/10 hover:border-accent/40 transition-all"
+              >
+                <h3 className="text-xl font-bold tracking-tight mb-1">{edu.degree}</h3>
+                <p className="text-muted-foreground/80 font-bold mb-4">{edu.institution}</p>
+                <div className="flex justify-between items-center text-sm font-bold uppercase tracking-widest text-accent">
+                  <span>{edu.period}</span>
+                  <span>{edu.score}</span>
+                </div>
+              </motion.div>
+            ))}
           </div>
 
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardContent className="pt-6">
-              <ul className="space-y-3">
-                {certifications.map((cert) => (
-                  <li key={cert} className="flex gap-2 items-start">
-                    <span className="text-primary mt-1">•</span>
-                    <span className="text-muted-foreground leading-relaxed">{cert}</span>
+          <div className="space-y-8">
+            <div className="flex items-center gap-4">
+              <div className="rounded-xl bg-primary/10 p-3 neon-glow">
+                <Award className="h-6 w-6 text-primary" />
+              </div>
+              <h2 className="text-2xl font-bold tracking-tight uppercase text-xs tracking-[0.3em] text-primary/60">Certifications</h2>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="glass p-8 rounded-[2rem] border-primary/10 hover:border-primary/40 transition-all"
+            >
+              <ul className="space-y-4">
+                {[
+                  "Becoming a Product Manager (2026)",
+                  "OCI Generative AI (2025)",
+                  "NPTEL — DBMS (2024)",
+                ].map((cert, i) => (
+                  <li key={i} className="flex gap-4 items-center group cursor-default">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary/40 group-hover:bg-primary transition-all" />
+                    <span className="text-sm font-bold text-muted-foreground/80 group-hover:text-primary transition-all tracking-tight">{cert}</span>
                   </li>
                 ))}
               </ul>
-            </CardContent>
-          </Card>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
