@@ -61,7 +61,7 @@ export function About() {
             viewport={{ once: true }}
             className="text-balance"
           >
-            I'm a product-oriented Computer Science undergraduate passionate about creating intuitive, <span className="text-primary">scalable products</span> focused on learning, productivity, and exceptional user experience.
+            I'm a <span className="text-primary">Product Management Intern at PaisaWapas</span>, where I bridge the gap between technical complexity and user-centric solutions.
           </motion.p>
 
           <motion.p
@@ -71,7 +71,7 @@ export function About() {
             viewport={{ once: true }}
             className="text-balance text-muted-foreground/60"
           >
-            Currently pursuing B.Tech in Computer Science at Chandigarh Group of Colleges, I've built full-stack products that solve real scheduling, learning, and financial challenges.
+            With a Computer Science background, I focus on building scalable products in AI and Fintech. My journey is driven by a passion for solving real-world challenges through data-driven insight and execution rigor.
           </motion.p>
         </div>
       </div>

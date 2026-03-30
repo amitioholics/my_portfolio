@@ -44,7 +44,7 @@ export function Hero() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold border border-primary/20 neon-glow backdrop-blur-md"
             >
               <Sparkles className="h-4 w-4 animate-pulse" />
-              <span className="tracking-wider uppercase text-[10px]">Available for Product Manager roles</span>
+              <span className="tracking-wider uppercase text-[10px]">Product Management Intern @ PaisaWapas</span>
             </motion.div>
 
             <div className="space-y-6">
