@@ -3,7 +3,7 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Github, Linkedin, Mail, Sparkles } from "lucide-react"
-import Link from "next/link"
+import Magnetic from "@/components/ui/magnetic"
 
 export function Hero() {
   const scrollToProjects = () => {
@@ -28,11 +28,11 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 py-20 overflow-hidden font-epilogue">
-      {/* Astral Background Effects */}
+      {/* Astral Background Effects - Refined */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(105,218,255,0.15),transparent_50%)]" />
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/10 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-1/4 -right-20 w-[30rem] h-[30rem] bg-secondary/10 rounded-full blur-[150px] animate-pulse animation-delay-700" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(105,218,255,0.08),transparent_70%)]" />
+        <div className="absolute top-1/4 -left-20 w-[40rem] h-[40rem] bg-primary/5 rounded-full blur-[160px] animate-pulse" />
+        <div className="absolute bottom-1/4 -right-20 w-[45rem] h-[45rem] bg-secondary/5 rounded-full blur-[180px] animate-pulse animation-delay-700" />
       </div>
 
       <div className="max-w-6xl w-full relative z-10">
@@ -41,45 +41,50 @@ export function Hero() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold border border-primary/20 neon-glow backdrop-blur-md"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-black border border-primary/20 neon-glow backdrop-blur-md"
             >
-              <Sparkles className="h-4 w-4 animate-pulse" />
-              <span className="tracking-wider uppercase text-[10px]">Product Management Intern @ PaisaWapas</span>
+              <Sparkles className="h-3 w-3 animate-pulse" />
+              <span className="tracking-[0.2em] uppercase">Product Management Intern @ PaisaWapas</span>
             </motion.div>
 
             <div className="space-y-6">
               <div className="space-y-4">
-                <h1 className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] text-foreground">
-                  Product-focused <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">builder</span>
+                <h1 className="text-6xl md:text-7xl lg:text-9xl font-black tracking-tighter leading-[0.85] text-foreground">
+                  Product <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">Visionary</span>
                 </h1>
-                <p className="text-2xl md:text-3xl text-muted-foreground/80 font-bold tracking-tight">
-                  Turning complex ideas into <br />scalable digital products.
+                <p className="text-xl md:text-2xl text-muted-foreground/80 font-bold tracking-tight max-w-lg">
+                  Bridging the gap between ambitious ideas and technical execution.
                 </p>
               </div>
             </div>
 
-            <p className="text-lg md:text-xl text-muted-foreground/60 leading-relaxed max-w-2xl font-medium">
-              I approach product with a data-driven mindset, combining user-centric design thinking with execution rigor. From AI tools to fintech solutions, I ship products that matter.
+            <p className="text-base md:text-lg text-muted-foreground/50 leading-relaxed max-w-xl font-medium">
+              Data-driven Product Manager focusing on AI and Fintech. I build products that are not just functional, but essential.
             </p>
 
-            <div className="flex flex-wrap gap-4 items-center pt-4">
-              <Button
-                onClick={scrollToProjects}
-                size="lg"
-                className="gap-2 px-8 h-14 rounded-full bg-primary text-primary-foreground font-bold hover:neon-glow-strong transition-all hover:scale-105 tracking-wide uppercase text-xs"
-              >
-                View Projects <ArrowRight className="h-5 w-5" />
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                asChild
-                className="h-14 px-8 rounded-full border-primary/30 hover:bg-primary/5 transition-all bg-transparent font-bold tracking-wide uppercase text-xs"
-              >
-                <a href="/resume.pdf" download>
-                  Download Resume
-                </a>
-              </Button>
+            <div className="flex flex-wrap gap-6 items-center pt-4">
+              <Magnetic>
+                <Button
+                  onClick={scrollToProjects}
+                  size="lg"
+                  className="gap-2 px-10 h-16 rounded-full bg-primary text-primary-foreground font-black hover:neon-glow-strong transition-all tracking-widest uppercase text-[10px]"
+                >
+                  Explore Work <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Magnetic>
+
+              <Magnetic>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  asChild
+                  className="h-16 px-10 rounded-full border-primary/20 hover:bg-primary/5 transition-all bg-transparent font-black tracking-widest uppercase text-[10px] text-primary/80"
+                >
+                  <a href="/Amit_kumar_Product.pdf" download>
+                    Get Resume
+                  </a>
+                </Button>
+              </Magnetic>
               <div className="flex gap-4 ml-2">
                 {[
                   { icon: Linkedin, href: "https://linkedin.com/in/amit-kumar-0a6617258" },

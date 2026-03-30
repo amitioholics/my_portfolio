@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Inter, Geist_Mono, Epilogue } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Chatbot } from "@/components/chatbot"
+import Particles from "@/components/ui/particles"
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
@@ -39,7 +40,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${epilogue.variable} ${geistMono.variable} font-sans antialiased bg-[#150629] text-[#efdfff]`}>
+      <body className={`${inter.variable} ${epilogue.variable} ${geistMono.variable} font-sans antialiased bg-[#150629] text-[#efdfff] astral-nebula`}>
+        <div className="astral-blob blob-1" />
+        <div className="astral-blob blob-2" />
+        <div className="astral-blob blob-3" />
+        <Particles quantity={100} ease={80} />
         {children}
         <Analytics />
         <Chatbot />
