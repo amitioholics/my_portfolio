@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { Download, Menu, X } from "lucide-react"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
-import Magnetic from "@/components/ui/magnetic"
 
 const navItems = [
   { name: "About", href: "#about" },
@@ -45,17 +44,15 @@ export function Navbar() {
                 {item.name}
               </button>
             ))}
-            <Magnetic>
-              <Button
-                asChild
-                size="sm"
-                className="rounded-full bg-primary text-primary-foreground font-bold text-[10px] uppercase tracking-widest px-6 hover:neon-glow-strong transition-all"
-              >
-                <a href="/Amit_kumar_Product.pdf" download="Amit_Kumar_Product_Manager_Resume.pdf">
-                  Resume
-                </a>
-              </Button>
-            </Magnetic>
+            <Button
+              asChild
+              size="sm"
+              className="rounded-full bg-primary text-primary-foreground font-bold text-[10px] uppercase tracking-widest px-6 hover:neon-glow-strong transition-all"
+            >
+              <a href="/resume.pdf" download="Amit_Kumar_Product_Manager_Resume.pdf">
+                Resume
+              </a>
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
